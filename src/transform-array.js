@@ -30,15 +30,14 @@ function transform(arr) {
       if (i === 0) result.splice(i, 1);
       else result.splice(i - 1, 2);
     } else if (result[i] === "--discard-next") {
-      if (i === arr.length - 1) result.splice(i, 1);
+      if (result[i + 2] === "--double-prev") result.splice(i, 3);
+      else if (result[i + 2] === "--discard-prev") result.splice(i, 3);
+      else if (i === arr.length - 1) result.splice(i, 1);
       else result.splice(i, 2);
     }
   }
   return result;
 }
-
-console.log(transform(["--discard-prev", 1, 2, 3]));
-console.log(transform([1, 2, 3, "--double-prev", 4, 5]));
 
 module.exports = {
   transform,
